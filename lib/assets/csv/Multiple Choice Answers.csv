@@ -1,0 +1,13 @@
+answer,score,answer,score,answer,score,answer,score
+older brother,10,older sister,0,younger brother/sister,0,cousin,0
+older brother,0,older sister,10,younger brother/sister,0,cousin,0
+older brother,0,older sister,0,younger brother/sister,10,cousin,0
+mother,0,father,10,aunt,0,uncle,0
+mother,10,father,0,aunt,0,uncle,0
+mother,0,father,0,aunt,0,uncle,10
+mother,0,father,0,aunt,10,uncle,0
+grandmother,10,grandfather,0,grandchild,0,grandslam,0
+grandmother,0,grandfather,10,grandchild,0,grandslam,0
+son,10,daughter,0,child,0,cousin,0
+son,0,daughter,10,child,0,cousin,0
+son,0,daughter,0,child,10,cousin,0

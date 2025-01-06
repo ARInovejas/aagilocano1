@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "354553502428",
+    "project_id": "ammoagilocano-6bbfd",
+    "storage_bucket": "ammoagilocano-6bbfd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354553502428:android:6404d8f83c786b1c2eb219",
+        "android_client_info": {
+          "package_name": "com.example.aagilocano1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354553502428-cdkgtmhj1f2482gpp1kt88urlirkti2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aagilocano1",
+            "certificate_hash": "4638239b20ae896a7de0215b035f54629a127616"
+          }
+        },
+        {
+          "client_id": "354553502428-2nhrapsgrraflig0ros8pkg35je0sqei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEcwyxa_zmvAEjaUY7iyftZSGgLD4iXDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354553502428-2nhrapsgrraflig0ros8pkg35je0sqei.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "354553502428-5or8va34q7lh9uj26ai4telulmv6cd4n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ammoagilocano2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354553502428:android:23f4a2b56d950ea12eb219",
+        "android_client_info": {
+          "package_name": "com.example.ammoagilocano2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354553502428-2nhrapsgrraflig0ros8pkg35je0sqei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEcwyxa_zmvAEjaUY7iyftZSGgLD4iXDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354553502428-2nhrapsgrraflig0ros8pkg35je0sqei.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "354553502428-5or8va34q7lh9uj26ai4telulmv6cd4n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ammoagilocano2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
