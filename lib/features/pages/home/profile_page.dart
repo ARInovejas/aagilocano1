@@ -7,6 +7,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../Models/user.dart';
@@ -27,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
   @override
   void initState(){
     super.initState();
-    tcontroller = TabController(length: 1, vsync: this);
+    tcontroller = TabController(length: 2, vsync: this);
   }
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: const Text("Profile"),
+              title: Text("Profile"),
               actions: [
                 IconButton(onPressed: () async { //logout button
                   signOut();
@@ -56,13 +57,14 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: const Text('Delete your Account?'),
-                          content: const Text(
-                              '''If you select Delete we will delete your account on our server.
-          
-          Your app data including your study progress will also be deleted and you won't be able to retrieve it.
-          
-          Since this is a security-sensitive operation, you eventually are asked to login before your account can be deleted.'''),
+                          title: Text('Delete your Account?', style: GoogleFonts.chivo(
+                            fontWeight: FontWeight.bold, fontSize: 20
+                          ),),
+                          content: Text(
+                              '''If you select Delete we will delete your account on our server.\nYour app data including your study progress will also be deleted and you won't be able to retrieve it.\nSince this is a security-sensitive operation, you eventually are asked to login before your account can be deleted.''',
+                              style: GoogleFonts.chivo( fontSize: 18),
+                              textAlign: TextAlign.left,
+                          ),
                           actions: [
                             TextButton(
                               child: const Text('Cancel'),
@@ -103,90 +105,100 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
               width: MediaQuery
                   .sizeOf(context)
                   .width,
-              child: Column( //Profile info
-                children: [
-                  Column(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/photos/app_bg.png"), fit: BoxFit.cover),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                  child: Column( //Profile info
                     children: [
-                      Row(
+                      Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsetsDirectional.all(10),
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(currentUser.photoURL.toString()),
-                              radius: 48,
-                              backgroundColor: Colors.lightGreen,
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsetsDirectional.all(10),
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(currentUser.photoURL.toString()),
+                                  radius: 48,
+                                  backgroundColor: Colors.lightGreen,
+                                ),
+                              ),
+                              Expanded(
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: AutoSizeText(
+                                          currentUser.displayName.toString(),
+                                          style: GoogleFonts.tinos(fontWeight: FontWeight.bold, fontSize: 48),
+                                          maxLines: 1,
+                                        ),
+                                      ),
+                                      const Divider(
+                                        height: 1, // The height of the divider
+                                        color: Colors.black, // The color of the divider
+                                        thickness: 1, // The thickness of the divider line
+                                        indent: 10, // The left padding (indent) of the divider
+                                        endIndent: 10, // The right padding (endIndent) of the divider
+                                      ),
+                                      // AutoSizeText("Level ${userData.level}",
+                                      //   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                      //   maxLines: 1,)
+                                    ],
+                                  )
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 50,
+                            child: TabBar(
+                              controller: tcontroller,
+                              labelStyle: GoogleFonts.tinos(fontWeight: FontWeight.bold),
+                              tabs: const [
+                                Tab(
+                                  icon: Icon(Icons.emoji_events_rounded),
+                                  text: "Achievements",
+                                ),
+                                Tab(
+                                  icon: Icon(Icons.menu_book_rounded),
+                                  text: "Bokabulario",
+                                ),
+                              ]
                             ),
                           ),
-                          Expanded(
-                              child: Column(
+                          SizedBox(
+                            height: 500,
+                            child: TabBarView(
+                                controller: tcontroller,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: AutoSizeText(
-                                      currentUser.displayName.toString(),
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
-                                      maxLines: 1,
-                                    ),
-                                  ),
-                                  const Divider(
-                                    height: 1, // The height of the divider
-                                    color: Colors.black, // The color of the divider
-                                    thickness: 1, // The thickness of the divider line
-                                    indent: 10, // The left padding (indent) of the divider
-                                    endIndent: 10, // The right padding (endIndent) of the divider
-                                  ),
-                                  AutoSizeText("Level ${userData.level}",
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                                    maxLines: 1,)
-                                ],
-                              )
+                                  AchievementsList(currentUser: currentUser, uid: uid),
+                                  VocabList(currentUser: currentUser, uid: uid)
+                                ]
+                            ),
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: 50,
-                        child: TabBar(
-                          controller: tcontroller,
-                          tabs: const [
-                            Tab(
-                              icon: Icon(Icons.sunny),
-                              text: "Achievements",
-                            ),
-                            // Tab(
-                            //   icon: Icon(Icons.menu_book_rounded),
-                            //   text: "Vocabulary",
-                            // ),
-                          ]
-                        ),
-                      ),
-                      SizedBox(
-                        height: 500,
-                        child: TabBarView(
-                            controller: tcontroller,
-                            children: [
-                              AchievementsList(currentUser: currentUser, uid: uid),
-                              // VocabList(currentUser: currentUser, uid: uid)
-                            ]
-                        ),
-                      )
                     ],
                   ),
-                ],
+                ),
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                     icon: Icon(Icons.quiz_rounded),
-                    label: "Quiz"
+                    label: "Ejersisio"
                 ),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.book_rounded),
-                    label: "Story"
+                    label: "Estoria"
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.history),
-                    label: "Practice"
+                    icon: Icon(Icons.menu_book_rounded),
+                    label: "Leksion"
                 ),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person_rounded),
@@ -200,7 +212,7 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
             ),
           );
         }else{
-          return const DefaultLoadingScreen();
+          return DefaultLoadingScreen();
         }
       }
     );
@@ -227,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
       Navigator.pushNamed(context, '/login');
 
     } on FirebaseAuthException catch (e) {
-      print(e);
+      // print(e);
 
       if (e.code == "requires-recent-login") {
         await reauthenticateAndDelete();
@@ -235,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
         // Handle other Firebase exceptions
       }
     } catch (e) {
-      print(e);
+      // print(e);
 
       // Handle general exception
     }
@@ -282,7 +294,7 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
       }
       await auth.signOut(); // firebase signOut
     } catch (e) {
-      print(e);
+      // print(e);
     }
 
   }

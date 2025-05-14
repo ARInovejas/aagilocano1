@@ -41,7 +41,6 @@ dependencies:
   google_fonts: ^6.2.1
   url_launcher: ^6.3.0
   cloud_firestore: ^5.2.1
-  flutter_login_facebook: ^2.0.1
   flutter_facebook_auth: ^7.0.1
   auto_size_text: ^3.0.0
   firebase_storage: ^12.1.3
@@ -50,6 +49,12 @@ dependencies:
   provider: ^6.1.2
   photo_view: ^0.15.0
   achievement_view: ^1.0.1
+  searchable_listview: ^2.16.0
+  flutter_form_builder: ^9.7.0
+  paginated_text: ^0.4.5
+  confetti: ^0.8.0
+  scroll_to_hide: ^2.2.0
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:
@@ -60,7 +65,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -75,32 +80,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - packages/aagilocano1/assets/photos/google_sign_in_button.png
-      - packages/aagilocano1/assets/photos/android_light_rd_SI.svg
-      - packages/aagilocano1/assets/photos/ailocano_logo_canva.png
-      - packages/aagilocano1/assets/photos/quizzes_logo.png
-      - packages/aagilocano1/assets/photos/Alphabet Evolution 1.jpg
-      - packages/aagilocano1/assets/photos/Alphabet Evolution 2.jpg
-      - packages/aagilocano1/assets/photos/Diptonggo Table.png
-      - packages/aagilocano1/assets/photos/Ridis.png
-      - packages/aagilocano1/assets/csv/Verbs.csv
-      - packages/aagilocano1/assets/csv/Past Tense.csv
-      - packages/aagilocano1/assets/csv/Present Tense.csv
-      - packages/aagilocano1/assets/csv/Future Tense.csv
-      - packages/aagilocano1/assets/csv/Basic Phrases.csv
-      - packages/aagilocano1/assets/csv/Dates.csv
-      - packages/aagilocano1/assets/csv/Family.csv
-      - packages/aagilocano1/assets/csv/Greetings.csv
-      - packages/aagilocano1/assets/csv/Location.csv
-      - packages/aagilocano1/assets/csv/Navigation.csv
-      - packages/aagilocano1/assets/csv/Numbers.csv
-      - packages/aagilocano1/assets/csv/Alphabet Evolution.csv
-      - packages/aagilocano1/assets/csv/Diptonggo.csv
-      - packages/aagilocano1/assets/csv/Diptonggo Table.csv
-      - packages/aagilocano1/assets/csv/Unit System.csv
-      - packages/aagilocano1/assets/csv/Stories.csv
-      - packages/aagilocano1/assets/csv/Multiple Choice Questions.csv
-      - packages/aagilocano1/assets/csv/Multiple Choice Answers.csv
+      - assets/photos/
+      - assets/csv/
+      - assets/lessons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

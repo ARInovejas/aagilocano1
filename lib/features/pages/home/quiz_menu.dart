@@ -1,7 +1,7 @@
 import 'package:aagilocano1/features/pages/home/quiz_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuizMenu extends StatefulWidget {
   const QuizMenu({super.key});
@@ -12,6 +12,7 @@ class QuizMenu extends StatefulWidget {
 
 class _QuizMenuState extends State<QuizMenu> {
   bool quizOn = false;
+  String bgDesign = "assets/photos/quiz_bg2.png";
   User currentUser = FirebaseAuth.instance.currentUser!;
   String uid = FirebaseAuth.instance.currentUser!.uid;
 
@@ -21,12 +22,17 @@ class _QuizMenuState extends State<QuizMenu> {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: const Text("Quiz"),
+            title: Text("Ejersisio"),
 
           ),
           body: SizedBox(
             width: MediaQuery.sizeOf(context).width,
-            child: setupBody()
+            child: DecoratedBox(decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(bgDesign), fit: BoxFit.cover),
+              ),
+              child: setupBody(),
+              )
             )
           ,
           bottomNavigationBar: showBottomNavbar()
@@ -39,20 +45,70 @@ class _QuizMenuState extends State<QuizMenu> {
       return QuizList(currentUser: currentUser, uid: uid);
     }else{
       return
-        Center(
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0,60,0,60),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Image(image: AssetImage('packages/aagilocano1/assets/photos/quizzes_logo.png')),
-              ElevatedButton(
-                  onPressed:()=>{
-                    setState(() {
-                      quizOn = true;
-                    })
-                  },
-                  child: const Text("Start Quiz")),
+              //logo
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0,20,0,20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: (MediaQuery
+                      .sizeOf(context)
+                      .height/3),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage("assets/photos/start_quiz_button_bg.png"), fit: BoxFit.fill),
+                    ),
+                  ),
+                ),
+              ),
+              //start button
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    quizOn = true;
+                    bgDesign = "assets/photos/app_bg.png";
+                  });
+                },
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(13, 0, 0, 13),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: Color(0xff61fb80),
+                            borderRadius: BorderRadius.circular(22)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          spacing: 5,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(13, 0, 0, 0),
+                              child: Icon(Icons.play_arrow, size: 20, color: Colors.black,),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 13, 13, 13),
+                              child: Text("Rugian ti Ejersisio", style: GoogleFonts.tinos(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black), textAlign: TextAlign.center,),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
-      );
+        );
     }
   }
 
@@ -65,15 +121,15 @@ class _QuizMenuState extends State<QuizMenu> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(Icons.quiz_rounded),
-                label: "Quiz"
+                label: "Ejersisio"
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.book_rounded),
-                label: "Story"
+                label: "Estoria"
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                label: "Practice"
+                icon: Icon(Icons.menu_book_rounded),
+                label: "Leksion"
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_rounded),

@@ -32,11 +32,12 @@ class DatabaseService{
   final CollectionReference dictionaryCollection = FirebaseFirestore.instance.collection('dictionary');
 
   //updates dictionary db (admin only)
-  Future updateDictionary(String ilocano, String english, String type) async{
+  Future updateDictionary(String ilocano, String english, String type, int order) async{
     return await dictionaryCollection.doc(ilocano).set({
       'ilocano': ilocano,
       'english': english,
-      'type': type
+      'type': type,
+      'order': order
     });
 
   }
@@ -121,7 +122,7 @@ class DatabaseService{
 
   //get user's vocabulary stream
   Stream<List<Vocabulary>> get vocabulary {
-    return userCollection.doc(uid).collection('vocabulary').snapshots().map(
+    return userCollection.doc(uid).collection('vocabulary').orderBy('order').snapshots().map(
       vocabListFromSnapshot);
   }
 
@@ -206,6 +207,20 @@ class DatabaseService{
         mcQuestionsFromSnapshot);
   }
 
+  Future<List<MultipleChoiceQuestion>> getUserMCQuestionList() async {
+    dynamic res;
+    await userCollection.doc(uid).collection('mc_quizlist').orderBy('leitnerWeight').get().then(
+          (querySnapshot) {
+        for (var docSnapshot in querySnapshot.docs) {
+          print('${docSnapshot.id} => ${docSnapshot.data()}');
+        }
+        res = mcQuestionsFromSnapshot(querySnapshot);
+      },
+      onError: (e) => print("Error completing: $e"),
+    );
+    return res;
+  }
+
 
   //ACHIEVEMENTS
   final CollectionReference achievementsCollection = FirebaseFirestore.instance.collection('achievements');
@@ -258,10 +273,23 @@ class DatabaseService{
     return res;
   }
 
+  Future getUserAchievement(String id) async{
+    dynamic data = {'achieved': true};
+    await userCollection.doc(uid).collection('achievements').doc(id).get().then(
+        (DocumentSnapshot doc) {
+          data = doc.data();
+        },
+      onError: (e) => print("Error getting document: $e"),
+    );
+    return data;
+
+  }
+
   //achievements list from snapshot
   List<Achievement> achievementsFromSnapshot(QuerySnapshot snapshot){
     return snapshot.docs.map((doc){
       return Achievement(
+          title: doc.get('title') ?? '',
           description: doc.get('description') ?? '',
           achieved: doc.get('achieved') ?? false);
     }).toList();
@@ -269,7 +297,7 @@ class DatabaseService{
 
   //get user's multiple choice questions stream
   Stream<List<Achievement>> get achievement {
-    return userCollection.doc(uid).collection('achievements').snapshots().map(
+    return userCollection.doc(uid).collection('achievements').orderBy('achieved', descending: true).snapshots().map(
         achievementsFromSnapshot);
   }
 

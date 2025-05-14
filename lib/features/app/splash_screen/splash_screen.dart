@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   final Widget? child;
@@ -23,9 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Naimbag nga isasampet!\nWelcome!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 30),),
+        child: Text("Naimbag nga isasampet!\nWelcome!", style: GoogleFonts.tinos(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 30),),
       ),
     );
   }

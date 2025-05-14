@@ -11,3 +11,14 @@ grandmother,0,grandfather,10,grandchild,0,grandslam,0
 son,10,daughter,0,child,0,cousin,0
 son,0,daughter,10,child,0,cousin,0
 son,0,daughter,0,child,10,cousin,0
+sunday,10,saturday,0,friday,0,monday,0
+tuesday,0,saturday,0,friday,0,monday,10
+saturday,0,wednesday,0,thursday,0,tuesday,10
+saturday,0,wednesday,10,sunday,0,tuesday,0
+monday,0,friday,0,thursday,10,wednesday,0
+friday,10,thursday,0,monday,0,sunday,0
+friday,0,saturday,10,sunday,0,thursday,0
+morning,10,afternoon,0,12 noon,0,"night, evening",0
+morning,0,afternoon,0,12 noon,10,"night, evening",0
+morning,0,afternoon,10,12 noon,0,"night, evening",0
+morning,0,afternoon,0,12 noon,0,"night, evening",10

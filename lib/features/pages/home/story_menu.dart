@@ -15,28 +15,34 @@ class _StoryMenuState extends State<StoryMenu> {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: const Text("Stories"),
+            title: Text("Estoria"),
 
           ),
           body: SizedBox(
             width: MediaQuery
                 .sizeOf(context)
                 .width,
-            child: StoriesPage(),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/photos/app_bg.png"), fit: BoxFit.cover),
+              ),
+              child: StoriesPage()
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   icon: Icon(Icons.quiz_rounded),
-                  label: "Quiz"
+                  label: "Ejersisio"
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.book_rounded),
-                  label: "Story"
+                  label: "Estoria"
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.history),
-                  label: "Practice"
+                  icon: Icon(Icons.menu_book_rounded),
+                  label: "Leksion"
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person_rounded),

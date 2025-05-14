@@ -1,5 +1,6 @@
 
 import 'package:aagilocano1/features/app/splash_screen/splash_screen.dart';
+import 'package:aagilocano1/features/pages/home/lessons_page.dart';
 import 'package:aagilocano1/features/pages/home/practice_menu.dart';
 import 'package:aagilocano1/features/pages/home/profile_page.dart';
 import 'package:aagilocano1/features/pages/home/quiz_menu.dart';
@@ -7,6 +8,7 @@ import 'package:aagilocano1/features/pages/home/story_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'features/pages/home/practice_page.dart';
 import 'features/pages/login/login_page.dart';
 import 'firebase_options.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Ammo Ag-Ilocano?',
       theme: ThemeData(
         // This is the theme of your application.
@@ -57,18 +60,15 @@ class MyApp extends StatelessWidget {
               return Colors.teal;
             }),
             foregroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-              return const Color(0xffffffff);
+              return const Color(0xfff0f0f0);
             }),
           ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color(0xff39f1d0), selectedItemColor: Colors.green, type: BottomNavigationBarType.fixed),
-        appBarTheme: AppBarTheme(foregroundColor: Colors.white, backgroundColor: const Color(0xff39f1d0), centerTitle: true,titleTextStyle: GoogleFonts.inter(textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 30))),
-        textTheme: GoogleFonts.getTextTheme("Open Sans", const TextTheme(
-          headlineMedium: TextStyle(
-            color: Color(0xffacece0),
-          ),
-        )),
+        appBarTheme: AppBarTheme(foregroundColor: Colors.black, backgroundColor: const Color(0xff39f1d0), centerTitle: false, titleTextStyle: GoogleFonts.chivo(textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black))),
+        fontFamily: GoogleFonts.tinos().fontFamily,
+        textTheme: GoogleFonts.tinosTextTheme(),
       ),
       routes: {
         '/': (context) => const SplashScreen(
@@ -81,6 +81,8 @@ class MyApp extends StatelessWidget {
         '/quiz_menu': (context) => const QuizMenu(),
         '/story_menu': (context) => const StoryMenu(),
         '/practice_menu': (context) => const PracticeMenu(),
+        '/lessons_page': (context) => const LessonsPage(),
+        '/practice_page': (context) => const PracticePage(),
       }
     );
   }
