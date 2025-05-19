@@ -2,6 +2,7 @@
 
 import 'package:aagilocano1/features/app/splash_screen/loading_screen.dart';
 import 'package:aagilocano1/features/services/database.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -57,10 +58,11 @@ class _LoginPageState extends State<LoginPage> {
                       Stack( //Title
                         children: <Widget>[
                           // Stroked text as border.
-                          Text(
-                            'Ammo Ag-Ilocano?',
+                          AutoSizeText(
+                            maxLines: 1,
+                            'Ammoyo ti Agilokano?',
                             style: GoogleFonts.chivo(
-                              fontSize: 42,
+                              fontSize: 40,
                               foreground: Paint()
                                 ..style = PaintingStyle.stroke
                                 ..strokeWidth = 2
@@ -68,10 +70,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           // Solid text as fill.
-                          Text(
-                            'Ammo Ag-Ilocano?',
+                          AutoSizeText(
+                            maxLines: 1,
+                            'Ammoyo ti Agilokano?',
                             style: GoogleFonts.chivo(
-                              fontSize: 42,
+                              fontSize: 40,
                               color: Color(0xff1a1a1a),
                             ),
                           ),
@@ -151,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0,10,0,0),
                         child: SizedBox(
-                          height: 80,
+                          height: 55,
                           child: FittedBox(
                             fit: BoxFit.fill,
                             child: TextButton(
@@ -166,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0,0,0,0),
                         child: SizedBox(
-                          height: 80,
+                          height: 60,
                           child: FittedBox(
                             fit: BoxFit.fill,
                             child: DecoratedBox(
@@ -208,6 +211,8 @@ class _LoginPageState extends State<LoginPage> {
             idToken: googleAuth.idToken);
 
         UserCredential userCredential= await FirebaseAuth.instance.signInWithCredential(credential);
+        await loadQuestions();
+        await loadStories();
         if(userCredential.additionalUserInfo!.isNewUser){
           setState(() {
             isLoading = true;
@@ -222,13 +227,9 @@ class _LoginPageState extends State<LoginPage> {
           await DatabaseService(uid: userCredential.user!.uid).createNewUserStoriesList();
         }
 
-        print(userCredential.user?.toString());
 
 
-        print("loading admin");
-        await loadQuestions();
-        await loadStories();
-        print("loading admin done");
+
         Navigator.pushNamed(context, '/profile');
       }
     }catch(e){
@@ -246,6 +247,10 @@ class _LoginPageState extends State<LoginPage> {
 
         final AuthCredential credential = FacebookAuthProvider.credential(res.accessToken!.tokenString);
         UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+
+        await loadQuestions();
+        await loadStories();
         if(userCredential.additionalUserInfo!.isNewUser){
           setState(() {
             isLoading = true;
@@ -257,7 +262,6 @@ class _LoginPageState extends State<LoginPage> {
           await DatabaseService(uid: userCredential.user!.uid).createNewUserQuizList();
           await DatabaseService(uid: userCredential.user!.uid).createNewUserAchievementsList();
         }
-        print(userCredential.user?.toString());
 
         Navigator.pushNamed(context, '/profile');
       }

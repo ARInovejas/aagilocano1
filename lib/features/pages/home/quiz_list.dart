@@ -40,7 +40,8 @@ class _QuizListState extends State<QuizList> {
     return loadedData;
   }
 
-  @override
+
+    @override
   Widget build(BuildContext context) {
 
     return FutureBuilder(
@@ -173,12 +174,14 @@ class _QuizListState extends State<QuizList> {
     );
   }
 
-  answerQuestion(int score, String questionText) {
+  answerQuestion(int score, String questionText) async {
+
     totalScore += score;
     String right = "Correct!";
     Color tColor = Colors.green;
     String rightPhoto = "assets/photos/correct.png";
     int lweight = 1; //correct answer increases leitner weight value, else it decreases
+    bool? res; //check if alertdialog is dismissed
 
     if(score!=10){
       right = "Incorrect";
@@ -191,7 +194,7 @@ class _QuizListState extends State<QuizList> {
 
     String confirm = "Next question";
     if(questionIndex == 9) confirm = "Finish quiz";
-    showDialog(
+    res = await showDialog(
         context: context,
         builder: (BuildContext context) =>
             AlertDialog(
@@ -232,6 +235,12 @@ class _QuizListState extends State<QuizList> {
               ],
             )
     );
+
+    if(res == null){
+      setState(() {
+        questionIndex += 1;
+      });
+    }
 
 
   }
