@@ -1,16 +1,7 @@
-# aagilocano1
+# Ammoyo ti Agilokano?: An Ilocano Language Learning Mobile Application based on the ILAING Language Learning Program
+Authors: Alexis R. Inovejas and Juan Miguel J. Bawagan
 
-A Mobile Application for Learning the Ilocano Language
+This mobile application is a language learning application based on the Ilokano Language Acquisition and Immersion for the New Generation (ILAING) language learning program. It contains lessons from ILAING's Ilokano language-learning program. It also consists of interactive quizzes and stories to train and test the learners' vocabulary. It uses the Computer-Assisted Language Learning method of instruction, specifically Spaced Repetition Models, for adaptive and effective quizzes. 
 
-## Getting Started
+Keywords: Ilocano Language, Mobile Application, Language Learning, Computer-Assisted Language Learning, Spaced Repetition, ILAING, Android
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
