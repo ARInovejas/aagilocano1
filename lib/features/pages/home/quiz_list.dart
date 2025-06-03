@@ -223,9 +223,6 @@ class _QuizListState extends State<QuizList> {
                     child: TextButton(
                         onPressed: ()=> {
                           Navigator.pop(context),
-                          setState(() {
-                            questionIndex += 1;
-                          })
                         },
                         child: Text(confirm, style: GoogleFonts.tinos(fontWeight: FontWeight.bold, color: Colors.black),
                             textAlign: TextAlign.center)
